@@ -70,6 +70,12 @@ uint8_t* FindErrors(uint64_t data, const uint8_t noPin, const uint8_t curPin)
 }
 
 
+///
+/// Scans all the pins specified by the arguments, specify where the MUXsel pins start and amount, where MUXctrl are and the number of states, input start and number.
+/// Returns a list of length inputNo (up to 64 inputs), containing all the scan data.
+/// Optional is how long it should scan the pins for, default for delay is 0ms (at least one time).
+/// Optional is to specify how many times the scan should be done, default for count is 1. 
+///
 uint64_t* ScanPins(const uint8_t muxSelStart, const uint8_t muxSelNo, const uint8_t muxCtrlStart, const uint8_t muxCtrlNo, const uint8_t muxStates, const uint8_t inputStart, const uint8_t inputNo, const uint16_t delay = 0, const uint8_t count = 1)
 {
 	uint8_t selected = 0x1;
@@ -79,7 +85,7 @@ uint64_t* ScanPins(const uint8_t muxSelStart, const uint8_t muxSelNo, const uint
 		for (uint8_t s = 0; s < muxSelNo; s++)
 		{
             // Writes what mux is selected
-			WriteBits(selected, muxSelStart, muxSelNo);		
+			WriteBits(selected, muxSelStart, muxSelNo);	
 			for (uint8_t d = 0; d < muxStates; d++)
 			{
 				WriteBits(d, muxCtrlStart, muxCtrlNo);
@@ -95,7 +101,6 @@ uint64_t* ScanPins(const uint8_t muxSelStart, const uint8_t muxSelNo, const uint
 					endTime = millis();
 				} 
 				while ((endTime - startTime) <= delay);
-				
 			}
 			// Moves the selected bit to the left
 			selected = selected << 1;
