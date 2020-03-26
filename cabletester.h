@@ -1,7 +1,6 @@
 #ifndef cabletester
 #define cabletester
 
-
 // LK pinout and configuration
 uint8_t noPairs = 12;
 char lkConfig[] = {'+', '-', 'G'};
