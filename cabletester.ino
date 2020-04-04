@@ -17,6 +17,8 @@
 #define MUX_STATES		8	// States of mux, 2^noBits
 
 
+using namespace std;
+
 void setup()
 {
 	Serial.begin(9600);
